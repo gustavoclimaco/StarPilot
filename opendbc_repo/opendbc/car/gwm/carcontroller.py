@@ -133,7 +133,7 @@ class CarController(CarControllerBase):
     if self.frame % 2 == 0:  # 50 Hz
 
       # Steer command
-      new_torque = int(round(actuators.steer * self.params.STEER_MAX))
+      new_torque = int(round(actuators.torque * self.params.STEER_MAX))
       apply_torque = apply_meas_steer_torque_limits(new_torque, self.apply_torque_last, CS.out.steeringTorqueEps, self.params)
       # Prevent sending the same 'apply_torque = 1' torque repeatedly, as it can cause EPS faults.
       if abs(apply_torque) == 1:
@@ -188,8 +188,8 @@ class CarController(CarControllerBase):
       ))
 
     new_actuators = actuators.as_builder()
-    new_actuators.steer = self.apply_torque_last / self.params.STEER_MAX
-    new_actuators.steerOutputCan = self.apply_torque_last
+    new_actuators.torque = self.apply_torque_last / self.params.STEER_MAX
+    new_actuators.torqueOutputCan = self.apply_torque_last
     new_actuators.accel = self.accel
 
     self.frame += 1

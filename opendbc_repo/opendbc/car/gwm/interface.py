@@ -1,9 +1,15 @@
 from opendbc.car import get_safety_config, structs
 from opendbc.car.interfaces import CarInterfaceBase
+from opendbc.car.gwm.carcontroller import CarController
+from opendbc.car.gwm.carstate import CarState
+from opendbc.car.gwm.radar_interface import RadarInterface
 from opendbc.car.gwm.values import GwmFlags
 
 
 class CarInterface(CarInterfaceBase):
+  CarState = CarState
+  CarController = CarController
+  RadarInterface = RadarInterface
 
   @staticmethod
   def _get_params(ret: structs.CarParams, candidate, fingerprint, car_fw, alpha_long, is_release, docs) -> structs.CarParams:

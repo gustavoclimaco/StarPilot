@@ -160,7 +160,7 @@ class CarController(CarControllerBase):
         ea_simulated_torque=ea_simulated_torque,
       ))
 
-      # Longitudinal control - original sunnypilot-derived structure: pass the
+      # Longitudinal control - structure from Sato's original port: pass the
       # normalized desired accel straight through; the pure-integral tuning in
       # interface.py is what keeps the command smooth (no shaping needed here).
       if self.CP.openpilotLongitudinalControl:

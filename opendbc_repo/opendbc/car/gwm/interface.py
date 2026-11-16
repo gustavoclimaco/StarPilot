@@ -55,7 +55,7 @@ class CarInterface(CarInterfaceBase):
       # stoppingDecelRate: how fast OP ramps decel to stopAccel (m/s^3).
       ret.stoppingDecelRate = 0.75
 
-      # Pure-integral controller, as in the original sunnypilot-derived port.
+      # Pure-integral controller, as in Sato's original port.
       # No kp on purpose: proportional gain couples every speed-measurement
       # jitter straight into the gas/brake command, which on this car felt as
       # constant pulsing (routes 0000005e/60). The integrator changes the

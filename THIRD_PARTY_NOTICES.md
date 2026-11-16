@@ -14,6 +14,23 @@ and related tests are adapted from the public BluePilot repository:
 - Historical reconstruction: [CREDITS.md](CREDITS.md#ford-support-adapted-from-bluepilot)
 - Provenance and contributors: [CREDITS.md](CREDITS.md)
 
+## Alexandre Sato GWM Haval H6 support
+
+StarPilot's GWM Haval H6 GT support - the car interface, CAN packing and CRC helpers, the DBC and
+the panda safety mode - is adapted from Alexandre Sato's openpilot port:
+
+- Source: <https://github.com/alexandresato/openpilot/tree/port_gwm_haval_h6>
+- Audited snapshots: [`6d82c406b`](https://github.com/alexandresato/openpilot/commit/6d82c406b)
+  ("init from scratch", 2024-07-06) and
+  [`5433e24bf`](https://github.com/alexandresato/opendbc/commit/5433e24bf)
+  ("move GWM to opendbc", 2024-08-18)
+- Source: <https://github.com/alexandresato/opendbc/tree/port_gwm_haval_h6>
+- Both repositories are MIT-licensed forks of `commaai/openpilot` and `commaai/opendbc`.
+- Provenance, contributors and local deviations:
+  [CREDITS.md](CREDITS.md#gwm-haval-h6-gt-support-adapted-from-alexandre-satos-openpilot-port)
+
+Alexandre Sato does not maintain or endorse StarPilot or this adaptation.
+
 ## sunnypilot Hyundai, Kia, and Genesis support
 
 Portions of StarPilot's HKG angle steering, CAN integration, panda safety enforcement and tests,

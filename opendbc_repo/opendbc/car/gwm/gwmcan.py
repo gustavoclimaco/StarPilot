@@ -1,5 +1,5 @@
-# CAN layout, CRC helpers and the longitudinal command structure derive from the
-# sunnypilot/opendbc Great Wall Motors work. See the repository root CREDITS.md
+# CAN layout, CRC helpers and the longitudinal command structure derive from
+# Alexandre Sato's GWM Haval H6 openpilot port. See the repository root CREDITS.md
 # and THIRD_PARTY_NOTICES.md for provenance.
 import numpy as np
 from opendbc.can import CANPacker
@@ -52,7 +52,7 @@ def create_steer_command(packer: CANPacker, CAN: CanBus, camera_stock_values, st
 
 
 def create_longitudinal_command(packer: CANPacker, CAN: CanBus, longitudinal_stock_values, accel: float, active: bool, standstill: bool):
-  """Original sunnypilot-derived structure: accel arrives normalized
+  """Structure from Sato's original port: accel arrives normalized
   (gas [0..1] by ACCEL_MAX, brake [-1..0) by ACCEL_MIN) and maps straight
   to the command signals. One surgical change from the original: the gas
   map is a single line through zero instead of the old [0.25, 1] -> [0,

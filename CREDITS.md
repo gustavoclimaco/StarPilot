@@ -143,30 +143,41 @@ substantially. Its HKG angle-control and supporting safety architecture neverthe
 derivative in design and in identifiable portions of the implementation. The applicable upstream
 notices are preserved in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-## GWM Haval H6 GT support adapted from a sunnypilot/opendbc Great Wall Motors port
+## GWM Haval H6 GT support adapted from Alexandre Sato's openpilot port
 
 The GWM Haval H6 GT port in `opendbc/car/gwm/`, `opendbc/dbc/gwm_haval_h6_mk3.dbc` and
-`opendbc/safety/modes/gwm.h` was brought over from the maintainer's own openpilot/FrogPilot fork
-(`gustavoclimaco/frogpilot`, branch `ford-gwm-2026`, commit `6e9c010c`), where it was developed and
-road-validated on the maintainer's vehicle. The CAN message layout, the CRC-8/0x1D checksum helpers,
-the `gwm_basic_chksum_for_0x12B` routine and the structure of the longitudinal gas/brake command
-derive from earlier Great Wall Motors work in the sunnypilot/opendbc ecosystem.
+`opendbc/safety/modes/gwm.h` originates with **Alexandre Sato**, who reverse engineered the car and
+wrote the port directly against upstream openpilot.
 
-Material local deviations from that earlier work:
+### Upstream authors and work
+
+| | |
+|---|---|
+| Author | Alexandre Sato (`AlexandreSato`, <sato_alexandre@hotmail.com>), plus his own device commits as `Comma Device <device@comma.ai>` |
+| First repository | <https://github.com/alexandresato/openpilot>, branch `port_gwm_haval_h6`, path `selfdrive/car/gwm/` |
+| Earliest commits | `897876495` (2024-06-29, "use Toyota Corolla TSS2 as a base") and `6d82c406b` (2024-07-06, "init from scratch") |
+| Moved to opendbc | <https://github.com/alexandresato/opendbc>, branch `port_gwm_haval_h6`, commit `5433e24bf` (2024-08-18, "move GWM to opendbc"), path `opendbc/car/gwm/` |
+| Licence | MIT, in both repositories (forks of `commaai/openpilot` and `commaai/opendbc`) |
+
+The CAN message layout, the CRC-8/0x1D checksum helper, the `gwm_basic_chksum_for_0x12B` routine, the
+DBC and the structure of the longitudinal gas/brake command are all his work. Alexandre Sato does not
+maintain or endorse StarPilot or this adaptation.
+
+### Local-to-upstream map
+
+The port reached StarPilot through the maintainer's own forks: Sato's openpilot port was carried into
+`gustavoclimaco/opendbc` (`2d46e5224`, 2024-06-23) and consumed by `gustavoclimaco/sunnypilot`, then
+into `gustavoclimaco/frogpilot` (branch `ford-gwm-2026`, commit `6e9c010c`), where it was tuned and
+road-validated on the maintainer's vehicle. This adaptation is taken from that FrogPilot tree.
+
+Material local deviations from Sato's original:
 
 - the longitudinal gas map is a single line through zero instead of a `[0.25, 1]` deadzone;
 - a Stop & Go resume pulse on `AP_ENABLE_COMMAND`, because this car has no native Stop & Go;
 - separate `main_on` / `acc_enabled` latches so the brake drops ACC without dropping lateral;
 - rolling counters wrap at 15 rather than 16, matching the stock streams measured on the bus;
-- a steer torque cap of 253, set by the speed at which the EPS latches a permanent fault.
-
-> **Provenance gap - resolve before any upstream PR.** The steps 2 and 4 of the policy below are not
-> yet satisfied for this entry: the exact upstream repository URL, commit SHA, source paths and the
-> authors in the relevant history have not been identified, because the fork this port came from
-> recorded the lineage only as "sunnypilot-derived" in source comments. Do not publish this port
-> upstream, or represent its provenance as complete, until those details are established and the
-> required copyright notices are reproduced in
-> [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- a steer torque cap of 253, set by the speed at which the EPS latches a permanent fault;
+- the safety mode is gated behind `CANFD`, since the messages are 64 byte.
 
 ## Policy for future third-party ports
 

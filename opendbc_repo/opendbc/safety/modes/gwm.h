@@ -3,8 +3,8 @@
 #include "opendbc/safety/declarations.h"
 
 // GWM Haval H6 GT safety. Message layout, checksum polynomial and the
-// longitudinal gas/brake scaling derive from the sunnypilot/opendbc Great Wall
-// Motors work; see the repository root CREDITS.md and THIRD_PARTY_NOTICES.md.
+// longitudinal gas/brake scaling derive from Alexandre Sato's GWM Haval H6
+// openpilot port; see the repository root CREDITS.md and THIRD_PARTY_NOTICES.md.
 
 #define GWM_ADAS_ACTIVATION      0xA1U // RX from STEER_AND_AP_STALK
 #define GWM_GAS                  0x60U // RX from CAR_OVERALL_SIGNALS

@@ -1,5 +1,5 @@
 # GWM Haval H6 GT port. The CAN layout, checksum helpers and the longitudinal
-# command structure derive from the sunnypilot/opendbc Great Wall Motors work;
+# command structure derive from Alexandre Sato's GWM Haval H6 openpilot port;
 # see the repository root CREDITS.md and THIRD_PARTY_NOTICES.md for provenance.
 from dataclasses import dataclass, field
 from enum import IntFlag
@@ -70,7 +70,7 @@ class CAR(Platforms):
   )
 
 
-# --- FW fingerprinting (UDS, same scheme as the sunnypilot/opendbc port) ---
+# --- FW fingerprinting (UDS, same scheme as Sato's original port) ---
 GREATWALLMOTORS_VERSION_REQUEST_MULTI = bytes([uds.SERVICE_TYPE.READ_DATA_BY_IDENTIFIER]) + \
   p16(uds.DATA_IDENTIFIER_TYPE.VEHICLE_MANUFACTURER_SPARE_PART_NUMBER) + \
   p16(uds.DATA_IDENTIFIER_TYPE.VEHICLE_MANUFACTURER_ECU_SOFTWARE_VERSION_NUMBER) + \
